@@ -47,7 +47,23 @@ this leads to the last entry in our matrix becoming 1 and -1.
 ## Heating (Neuman)
 We can use Fourier's Law to model a heating point:
 $$q = -k \nabla T$$
-where $q$ is the local heat flux in $Wm²$, $k$ is the conductivity in $\frac{W}{mK}.
-
+where $q$ is the local heat flux in $Wm²$, $k$ is the conductivity in $\frac{W}{mK}$.
+note: 
+$$q = \frac{P}{A}$$
+where $P$ is the heating power and $A$ is the heating area.
+We apply discretisation and consider the end point $x=L$:
+$$q \approx -k \frac{T_{N+1}-T_{N}}{\Delta x}$$
+note we used the forward methode. This leads to the point $T_{N+1}$ being present, which we do not know, because it is not part or our domain.
+This is called a ghost point and we can get ridd of it with the heat equation itself. 
+Since we need this boundary condition in terms of the time derivative as well we can solve the condition for $T_{N+1}$ and plug it into the heat equation. This also eliminates the ghost point:
+$$T_{N+1} = T_N - \frac{q \Delta x}{k}$$
+substituted into the heat equation:
+```math
+\left. \frac{\partial T(x,t)}{\partial t} \right|_{x=L} = \alpha \left.\frac{\partial² T(x,t)}{\partial x²} \right|_{x=L} \approx \alpha \frac{\left( T_N - \frac{q \Delta x}{k} \right) -2T_N + T_{N-1} }{\Delta x²}
+```
+this simplifies to
+```math
+\left. \frac{\partial T(x,t)}{\partial t} \right|_{x=L} \approx \alpha \frac{T_{N-1} -T_N -\frac{q \Delta x}{k}}{\Delta x²}
+```
 
 
