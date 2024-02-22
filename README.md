@@ -74,7 +74,7 @@ def dTdt(t, T):
     ret[N] = alpha/dx**2 * (1*(q*dx/k) - T_mod[N] + T_mod[N-1]) #heat source at right end 
     return ret
 ```
-We can also use this to model thermal radiation losses because its basically a negative heat source that is proportional to temperature.
+We can also use this to model thermal radiation losses because it's basically just a negative heat source that is proportional to temperature.
 The Stefan-bolzmann law states:
 $$q = \epsilon \sigma \left( T⁴ - T_{\text{env}}⁴ \right)$$
 We can substitue this in the expression above and get radiation in our model for free.
