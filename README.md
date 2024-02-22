@@ -83,3 +83,8 @@ In the steady state there will be a temperature difference between $T_{N/2}$ and
 using the conduction formula above we get the rate of heat transfer. This will have to match 
 the Steffan-Bolzmann law:
 $$Q = A \epsilon \sigma \left( T⁴ - T_{\text{env}}⁴ \right)$$
+## Time Domain
+??? no idea abpart from experimental data
+# Notes
+## Solver
+The problem might be stiff so an implicit methode is better compared to explicit. I observed oscillations with ```RK45``` and got very nice results with ```Radau```
