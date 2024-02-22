@@ -65,5 +65,28 @@ this simplifies to
 ```math
 \left. \frac{\partial T(x,t)}{\partial t} \right|_{x=L} \approx \alpha \frac{T_{N-1} -T_N -\frac{q \Delta x}{k}}{\Delta x²}
 ```
-
-
+This boundary condition can not be directly implemented in the matrix. But we can implement it in the dTdt function we pass to scipy.ivp_solve:
+```python
+def dTdt(t, T):
+    T_mod = np.copy(T)
+    T_mod[0] = temp_left  # constant temp at left end
+    ret = A.dot(T_mod)
+    ret[N] = alpha/dx**2 * (1*(q*dx/k) - T_mod[N] + T_mod[N-1]) #heat source at right end 
+    return ret
+```
+We can also use this to model thermal radiation losses because its basically a negative heat source that is proportional to temperature.
+The Stefan-bolzmann law states:
+$$q = \epsilon \sigma \left( T⁴ - T_{\text{env}}⁴ \right)$$
+We can substitue this in the expression above and get radiation in our model for free.
+# Model Validation
+We can use analytic solutions for the steady state case to validate the model.
+## Conduction
+The rate of heat transfer through a homogenious rod is given by:
+$$Q= -kA \frac{\Delta T}{L}$$
+## Radiation
+After we have validated Conduction we can use it to validate Radiation.
+We plant a heat source at $n=N/2$ and the radiating boundary at $n=N$
+In the steady state there will be a temperature difference between $T_{N/2}$ and $T{N}$
+using the conduction formula above we get the rate of heat transfer. This will have to match 
+the Steffan-Bolzmann law:
+$$Q = A \epsilon \sigma \left( T⁴ - T_{\text{env}}⁴ \right)$$
