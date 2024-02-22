@@ -44,6 +44,10 @@ $$\left. \frac{\partial T}{\partial x} \right|_{x=L} = 0$$
 where $L$ is our end point. Applying finite differences approximation we get:
 $$\frac{\partial T_{N}}{\partial x} \approx \frac{T_{N-1}-T_N}{\Delta x} = 0$$
 this leads to the last entry in our matrix becoming 1 and -1.
+## Heating (Neuman)
+We can use Fourier's Law to model a heating point:
+$$q = -k \nabla T$$
+where $q$ is the local heat flux in $Wm²$, $k$ is the conductivity in $\frac{W}{mK}.
 
 
 
