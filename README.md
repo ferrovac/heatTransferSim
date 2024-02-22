@@ -11,4 +11,12 @@ First we define the grid. We use $N$ equally spaced datapoints to represent the 
 Using the FD methode we get the following approximation for the second spacial derivative:
 $$\frac{\partial T}{\partial t} \approx \alpha \frac{T_{n+1} -2 T_n + T_{n-1}}{\Delta x²} $$
 where $\Delta x$ is the spacial difference between two datapoints.
+We can use this approximation to descripe the PDE as system of ODEs as matrix equation in the form:
+```math
+\frac{d}{dt} \begin{bmatrix} T_0 \\ .\\.\\.\\ T_{N-1}\\T_{N} \end{bmatrix} = \alpha \begin{bmatrix} 
+   0 & \cdot & \cdot & \cdot & \cdot & 0 & 0\\
+   1 & -2 & 1 & \cdot & \cdot & \cdot  & 0 \\
+   g & h & i 
+   \end{bmatrix}
+```
 
