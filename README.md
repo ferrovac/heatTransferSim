@@ -23,9 +23,27 @@ We can use this approximation to descripe the PDE as system of ODEs as matrix eq
    \cdot &   & \cdot & \cdot & \cdot & \cdot &  \cdot & \cdot\\
    \cdot &   &   & \cdot & \cdot & \cdot & \cdot  & 0\\
    0 & \cdot  & \cdot & \cdot & 0 & 1 & -2 & 1\\
-   0 & \cdot  & \cdot & \cdot & \cdot & \cdot & 1 & 1
+   0 & \cdot  & \cdot & \cdot & \cdot & \cdot & 1 & -1
    \end{bmatrix}
 }_{=:\boldsymbol{dTdt}}
 \frac{1}{\Delta x²}
 ```
+The first and last row of the matrix already contain a boundary condition. Not all boundary condition can be directly encoded in the matrix.
+# Boundary Conditions
+## Constant Temperature (Dirichlet)
+The condition states:
+$$T(x) = T_B$$
+for $x = 0$ we get:
+$$T_{0} = T_B$$
+to incorporate the condition into the ode system we need to consider this in terms of $\frac{dT}{dt}$ i.e. $\frac{dT_{0}}{dt} = 0$
+this leads to the first row of the matrix $\boldsymbol{dTdt}$ being all zeros.
+## Isolating (Neuman)
+An isolating end means no temperature change over distance at the boundary point or:
+$$\left. \frac{\partial T}{\partial x} \right|_{x=L} = 0$$
+
+where $L$ is our end point. Applying finite differences approximation we get:
+$$\frac{\partial T_{N}}{\partial x} \approx \frac{T_{N-1}-T_N}{\Delta x} = 0$$
+this leads to the last entry in our matrix becoming 1 and -1.
+
+
 
