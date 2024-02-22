@@ -13,10 +13,19 @@ $$\frac{\partial T}{\partial t} \approx \alpha \frac{T_{n+1} -2 T_n + T_{n-1}}{\
 where $\Delta x$ is the spacial difference between two datapoints.
 We can use this approximation to descripe the PDE as system of ODEs as matrix equation in the form:
 ```math
-\frac{d}{dt} \begin{bmatrix} T_0 \\ .\\.\\.\\ T_{N-1}\\T_{N} \end{bmatrix} = \alpha \begin{bmatrix} 
-   0 & \cdot & \cdot & \cdot & \cdot & 0 & 0\\
-   1 & -2 & 1 & \cdot & \cdot & \cdot  & 0 \\
-   g & h & i 
+\frac{d}{dt} \underbrace{ \begin{bmatrix} T_0 \\ .\\.\\.\\ T_{N-1}\\T_{N} \end{bmatrix}}_{=:\vec{T}} = \alpha
+\underbrace{
+\begin{bmatrix} 
+   0 & \cdot & \cdot & \cdot & \cdot & \cdot & 0 & 0\\
+   1 & -2 & 1 & 0 & \cdot & \cdot & \cdot  & 0 \\
+   0 & 1 & -2 & 1 & 0 & \cdot & \cdot & 0 \\
+   \cdot & \cdot  & \cdot & \cdot & \cdot & \cdot &   & \cdot\\
+   \cdot &   & \cdot & \cdot & \cdot & \cdot &  \cdot & \cdot\\
+   \cdot &   &   & \cdot & \cdot & \cdot & \cdot  & 0\\
+   0 & \cdot  & \cdot & \cdot & 0 & 1 & -2 & 1\\
+   0 & \cdot  & \cdot & \cdot & \cdot & \cdot & 1 & 1
    \end{bmatrix}
+}_{=:\boldsymbol{dTdt}}
+\frac{1}{\Delta x²}
 ```
 
