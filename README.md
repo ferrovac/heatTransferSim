@@ -26,6 +26,7 @@ We can use this approximation to describe the PDE as system of ODEs as matrix eq
    0 & \cdot  & \cdot & \cdot & \cdot & \cdot & 1 & -1
    \end{bmatrix}
 }_{=:\boldsymbol{dTdt}}
+\begin{bmatrix} T_0 \\ .\\.\\.\\ T_{N-1}\\T_{N} \end{bmatrix}
 \frac{1}{\Delta x²}
 ```
 The first and last row of the matrix already contain a boundary condition. Not all boundary condition can be directly encoded in the matrix.
