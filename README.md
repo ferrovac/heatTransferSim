@@ -5,7 +5,7 @@ The goal is to solve the heat equation
 $$\frac{\partial T}{ \partial t} = \alpha  \nabla ^{2} T$$
 we simplify and only consider the 1D case:
 $$\frac{\partial T}{ \partial t} = \alpha  \frac{\partial ^2 T}{\partial x²}$$
-To solve the equation numerically we convert the PDE to system of ODE using the finite differences method. The system of ODEs is then integrated using scypy.ivp_solve module.
+To solve the equation numerically we convert the PDE to a system of ODEs using the finite differences method. The system of ODEs is then integrated using scipy.ivp_solve module.
 # Discretisation
 First we define the grid. We use $N$ equally spaced data points to represent the rod, where $T_{n}$ denotes the temperature at point $n$.
 Using the FD method we get the following approximation for the second spacial derivative:
