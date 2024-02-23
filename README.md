@@ -7,7 +7,7 @@ we simplify and only consider the 1D case:
 $$\frac{\partial T}{ \partial t} = \alpha  \frac{\partial ^2 T}{\partial x²}$$
 To solve the equation numerically we convert the PDE to system of ODE using the finite differences method. The system of ODEs is then integrated using scypy.ivp_solve module.
 # Discretisation
-First we define the grid. We use $N$ equally spaced data points to represent the rod, where $T_{N}$ denotes the temperature at point $N$.
+First we define the grid. We use $N$ equally spaced data points to represent the rod, where $T_{n}$ denotes the temperature at point $n$.
 Using the FD method we get the following approximation for the second spacial derivative:
 $$\frac{\partial² T}{\partial x²} \approx \alpha \frac{T_{n+1} -2 T_n + T_{n-1}}{\Delta x²} $$
 where $\Delta x$ is the spacial difference between two data points.
