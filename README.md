@@ -5,13 +5,13 @@ The goal is to solve the heat equation
 $$\frac{\partial T}{ \partial t} = \alpha  \nabla ^{2} T$$
 we simplify and only consider the 1D case:
 $$\frac{\partial T}{ \partial t} = \alpha  \frac{\partial ^2 T}{\partial x²}$$
-To solve the equation numerically we convert the PDE to system of ODE using the finite differences methode. The system of ODEs is then integrated using scypy.ivp_solve module.
+To solve the equation numerically we convert the PDE to system of ODE using the finite differences method. The system of ODEs is then integrated using scypy.ivp_solve module.
 # Discretisation
-First we define the grid. We use $N$ equally spaced datapoints to represent the rod, where $T_{N}$ denotes the temperature at point $N$.
-Using the FD methode we get the following approximation for the second spacial derivative:
+First we define the grid. We use $N$ equally spaced data points to represent the rod, where $T_{N}$ denotes the temperature at point $N$.
+Using the FD method we get the following approximation for the second spacial derivative:
 $$\frac{\partial² T}{\partial x²} \approx \alpha \frac{T_{n+1} -2 T_n + T_{n-1}}{\Delta x²} $$
-where $\Delta x$ is the spacial difference between two datapoints.
-We can use this approximation to descripe the PDE as system of ODEs as matrix equation in the form:
+where $\Delta x$ is the spacial difference between two data points.
+We can use this approximation to describe the PDE as system of ODEs as matrix equation in the form:
 ```math
 \frac{d}{dt} \underbrace{ \begin{bmatrix} T_0 \\ .\\.\\.\\ T_{N-1}\\T_{N} \end{bmatrix}}_{=:\vec{T}} = \alpha
 \underbrace{
@@ -46,8 +46,8 @@ $$q = \frac{P}{A}$$
 where $P$ is the heating power and $A$ is the heating area.
 We apply discretisation and consider the end point $x=L$:
 $$q \approx -k \frac{T_{N+1}-T_{N}}{\Delta x}$$
-note we used the forward methode. This leads to the point $T_{N+1}$ being present, which we do not know, because it is not part or our domain.
-This is called a ghost point and we can get ridd of it with the heat equation itself. 
+note we used the forward method. This leads to the point $T_{N+1}$ being present, which we do not know, because it is not part or our domain.
+This is called a ghost point and we can get rid of it with the heat equation itself. 
 Since we need this boundary condition in terms of the time derivative as well we can solve the condition for $T_{N+1}$ and plug it into the heat equation. This also eliminates the ghost point:
 $$T_{N+1} = T_N - \frac{q \Delta x}{k}$$
 substituted into the heat equation:
@@ -68,13 +68,13 @@ def dTdt(t, T):
     return ret
 ```
 We can also use this to model thermal radiation losses because it's basically just a negative heat source that is proportional to temperature.
-The Stefan-bolzmann law states:
+The Stefan-Bolzmann law states:
 $$q = \epsilon \sigma \left( T⁴ - T_{\text{env}}⁴ \right)$$
-We can substitue this in the expression above and get radiation in our model for free.
+We can substitute this in the expression above and get radiation in our model for free.
 # Model Validation
 We can use analytic solutions for the steady state case to validate the model.
 ## Conduction
-The rate of heat transfer through a homogenious rod is given by:
+The rate of heat transfer through a homogenous rod is given by:
 $$Q= -kA \frac{\Delta T}{L}$$
 ## Radiation
 After we have validated Conduction we can use it to validate Radiation.
@@ -87,4 +87,4 @@ $$Q = A \epsilon \sigma \left( T⁴ - T_{\text{env}}⁴ \right)$$
 ??? no idea apart from experimental data
 # Notes
 ## Solver
-The problem might be stiff so an implicit methode is better compared to explicit. I observed oscillations with ```RK45``` and got very nice results with ```Radau```
+The problem might be stiff so an implicit method is better compared to explicit. I observed oscillations with ```RK45``` and got very nice results with ```Radau```
